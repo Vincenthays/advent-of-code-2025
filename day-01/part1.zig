@@ -13,18 +13,10 @@ pub fn main() !void {
             else => unreachable,
         };
 
-        while (cur < 100) {
-            cur += 100;
-        }
-        while (cur > 100) {
-            cur -= 100;
-        }
-        if (cur == 100) {
-            cur = 0;
-        }
-        if (cur == 0) {
-            count += 1;
-        }
+        while (cur < 100) : (cur += 100) {}
+        while (cur > 100) : (cur -= 100) {}
+        if (cur == 100) cur = 0;
+        if (cur == 0) count += 1;
     }
 
     std.debug.print("Count: {any}\n", .{count});
