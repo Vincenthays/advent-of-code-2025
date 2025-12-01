@@ -3,24 +3,15 @@ fn main() {
         include_str!("input.txt")
             .lines()
             .into_iter()
-            .fold((50, 0), |(mut cur, mut count), l| {
-                let mut number: i32 = l[1..].parse().unwrap();
-                if l.starts_with("L") {
-                    number = -number
-                }
-                cur = (cur + number) % 100;
-
-                if number < 0 {
-                    cur += 100;
-                }
-                if cur == 100 {
-                    cur = 0;
-                }
+            .fold((50, 0), |(mut cur, mut count), line| {
+                let delta = {
+                    let n: i32 = line[1..].parse().unwrap();
+                    if line.starts_with('L') { -n } else { n }
+                };
+                let cur = (cur + delta).rem_euclid(100);
                 if cur == 0 {
                     count += 1;
                 }
-
-                dbg!(cur);
                 (cur, count)
             });
 
