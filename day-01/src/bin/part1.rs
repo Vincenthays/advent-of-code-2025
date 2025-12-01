@@ -7,7 +7,16 @@ fn main() {
                 if line.starts_with('L') { -n } else { n }
             };
 
-            let cur = (cur + delta).rem_euclid(100);
+            let mut cur = cur + delta;
+            while cur < 0 {
+                cur += 100;
+            }
+            while cur > 100 {
+                cur -= 100;
+            }
+            if cur == 100 {
+                cur = 0;
+            }
             if cur == 0 {
                 count += 1
             }
