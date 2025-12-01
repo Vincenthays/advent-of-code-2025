@@ -7,12 +7,11 @@ pub fn main() !void {
     var count: u32 = 0;
 
     while (it.next()) |line| {
-        const delta = switch (line[0]) {
+        curr += switch (line[0]) {
             'L' => try std.fmt.parseInt(i32, line[1..], 10),
             'R' => -try std.fmt.parseInt(i32, line[1..], 10),
             else => unreachable,
         };
-        curr += delta;
 
         while (curr < 100) {
             curr += 100;
