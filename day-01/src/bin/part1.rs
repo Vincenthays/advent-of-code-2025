@@ -8,7 +8,9 @@ fn main() {
             };
 
             let cur = (cur + delta).rem_euclid(100);
-            let count = if cur == 0 { count + 1 } else { count };
+            if cur == 0 {
+                count += 1
+            }
             (cur, count)
         });
 
