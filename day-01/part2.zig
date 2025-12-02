@@ -11,10 +11,7 @@ pub fn main() !void {
         const delta = try std.fmt.parseInt(usize, line[1..], 10);
 
         for (0..delta) |_| {
-            if (is_plus) cur += 1 else cur -= 1;
-            if (cur > 100) cur -= 100;
-            if (cur < 0) cur += 100;
-            if (cur == 100) cur = 0;
+            cur = if (is_plus) @mod(cur + 1, 100) else @mod(cur + 99, 100);
             if (cur == 0) count += 1;
         }
     }
