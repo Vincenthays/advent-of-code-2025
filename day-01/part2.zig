@@ -7,16 +7,16 @@ pub fn main() !void {
     var count: u32 = 0;
 
     while (it.next()) |line| {
-        cur += switch (line[0]) {
-            'L' => try std.fmt.parseInt(i32, line[1..], 10),
-            'R' => -try std.fmt.parseInt(i32, line[1..], 10),
-            else => unreachable,
-        };
+        const is_plus = line[0] == 'R';
+        const delta = try std.fmt.parseInt(usize, line[1..], 10);
 
-        while (cur < 100) : (cur += 100) {}
-        while (cur > 100) : (cur -= 100) {}
-        if (cur == 100) cur = 0;
-        if (cur == 0) count += 1;
+        for (0..delta) |_| {
+            if (is_plus) cur += 1 else cur -= 1;
+            if (cur > 100) cur -= 100;
+            if (cur < 0) cur += 100;
+            if (cur == 100) cur = 0;
+            if (cur == 0) count += 1;
+        }
     }
 
     std.debug.print("Count: {any}\n", .{count});
