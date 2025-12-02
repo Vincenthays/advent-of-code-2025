@@ -1,8 +1,8 @@
 const std = @import("std");
-const input = @embedFile("src/bin/input.txt");
+const input = @embedFile("input.txt");
 
 pub fn main() !void {
-    var it = std.mem.splitAny(u8, input, '\n');
+    var it = std.mem.splitAny(u8, input, ',');
     var cur: i32 = 50;
     var count: u32 = 0;
 
